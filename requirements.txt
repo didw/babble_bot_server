@@ -1,0 +1,6 @@
+flask==2.3.3
+google-cloud-speech==2.21.0
+openai==0.28.0
+urllib3==1.26.16
+pytest==7.4.2
+pytest-flask==1.2.0

@@ -1,0 +1,44 @@
+# Python Files
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.egg-info/
+*.egg
+*.pem
+
+# Test files
+*.coverage
+htmlcov/
+
+# Flask Files
+instance/
+
+# Virtual Environment
+.venv/
+*.virtualenv
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# config files
+credentials/
+
+# pytest files
+.pytest_cache/
+
+# log
+log/
