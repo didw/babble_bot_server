@@ -39,3 +39,17 @@ def test_transcribe_audio(client):
     assert 'transcripts' in response_data
     assert isinstance(response_data['transcripts'], list)
 
+
+def test_synthesize_text(client):
+    sample_request_data = {"text": "안녕하세요. 좋은 하루입니다."}
+    
+    response = client.post('/synthesize', json=sample_request_data)
+    assert response.status_code == 200
+    
+    # You may also want to check if the audio is of a non-zero length,
+    # meaning something was synthesized.
+    assert len(response.data) > 0
+
+    # You may additionally want to save the output audio for manual verification
+    with open('test_output.mp3', 'wb') as f:
+        f.write(response.data)

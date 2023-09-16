@@ -2,7 +2,7 @@ import os
 import json
 import logging
 from flask import Flask, request, jsonify
-from speech_service import transcribe_audio
+from speech_service import transcribe_audio, synthesize_text
 from chat_service import get_gpt_response
 
 
@@ -50,6 +50,24 @@ def transcribe():
         return jsonify({"transcripts": transcripts}), 200
 
 
+@app.route('/synthesize', methods=['POST'])
+def synthesize():
+    text = request.json.get("text")
+    
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+    
+    audio_content = synthesize_text(google_config["project_id"], text)
+    
+    # You can also save this as a file if you want to
+    # with open("output.mp3", "wb") as out:
+    #     out.write(audio_content)
+
+    # Here, I'm returning the audio content directly
+    # You might want to encode it in a specific format or return as a file download
+    return audio_content, 200, {'Content-Type': 'audio/mp3'}
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
     request_data = request.json
@@ -65,3 +83,5 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0", port=35950)
+    # app.run(debug=True, host="0.0.0.0", port=35950)
+
